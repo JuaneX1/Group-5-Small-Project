@@ -1,0 +1,49 @@
+.header{
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.3)), url(cop.png);
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    padding: 10px 8%;
+}
+
+button{
+    margin-top: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.title{
+    position: absolute;
+    top: 35%;
+    left: 35%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    margin-top: 100px;
+    color: white;
+}
+
+.compname{
+    font-family: 'Pacifico', cursive;
+    font-size: 80px;
+    line-height: 80px;
+    font-weight: 600;
+    max-width: 650px;
+    margin-bottom: 30px;
+}
+
+.slogan{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.footerinfo{
+	background-color: #ab946b;
+	position: fixed;
+	bottom: 0;
+	width: 100vw;
+    height: 60px;
+}
