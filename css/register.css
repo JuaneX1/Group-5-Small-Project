@@ -1,0 +1,90 @@
+nav{
+    box-shadow: 1px 1px 1px 1px rgba(52, 52, 52, 0.2);
+}
+
+.navbar-brand{
+    margin-left: 20px;
+    font-family: 'Pacifico', cursive;
+    font-size: 30px;
+    margin-bottom: 5px;
+}
+
+.header{
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.3)), url(../images/cop2.png);
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    padding: 10px 8%;
+}
+
+.container{
+    background-color: white;
+    position: absolute;
+    top: 39%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 100px;
+    border-radius: 10px;
+    text-align: left;
+    max-width: 400px;
+}
+
+
+h1{
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1rem; 
+    margin-top: 20px;
+}
+
+.inputGroup {
+    margin-bottom: 1rem; 
+}
+
+.inputGroup label {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold; 
+    margin-left: 5px; 
+}
+
+.inputGroup input{
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    background: #ededed;
+    text-align: left;
+    padding: 10px;
+    font-size: 15px;
+    color: #7c7c7c;
+    font-weight: 250;
+}
+
+#submitbtn{
+    margin-top: 10px;
+    background-color: #005BA6;
+}
+
+p{
+    font-family: 'Roboto', sans-serif;
+}
+
+a{
+    text-decoration: none;
+    color: #005BA6;
+}
+
+.footerinfo{
+	background-color: #ab946b;
+	position: fixed;
+	bottom: 0;
+	width: 100vw;
+    height: 60px;
+}
