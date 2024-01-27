@@ -24,8 +24,8 @@ nav{
     cursor: pointer;
 }
 
-.header{
-    background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.3)), url(/images/cop2.png);
+.background{
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.3)), url(../images/cop2.png);
     margin: 0;
     padding: 0;
     width: 100%;
@@ -35,15 +35,119 @@ nav{
     padding: 10px 8%;
 }
 
-.title{
+.container{
     background-color: white;
     position: absolute;
-    width: 50%;
     top: 39%;
     left: 50%;
     transform: translate(-50%, -50%);
     margin-top: 100px;
     border-radius: 10px;
+}
+
+#contactform{
+    border-right: solid 10px #005BA6;
+}
+
+.addcontact{
+    padding: 15px;
+    text-align: center;
+}
+
+h3{
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 20px;
+    font-weight: bold;
+    margin-bottom: 2rem; 
+    margin-top: 20px;
+}
+
+.inputGroup {
+    text-align: left !important;
+    margin-bottom: 1rem; 
+}
+
+.inputGroup label {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold; 
+    margin-left: 5px; 
+}
+
+.inputGroup input{
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    background: #ededed;
+    text-align: left;
+    padding: 10px;
+    font-size: 15px;
+    color: #7c7c7c;
+    font-weight: 250;
+}
+
+#addbtn, #clearbtn{
+    margin-top: 1rem;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 10px;
+    margin-left: 5px;
+    text-align: center;
+}
+
+.tabledesign{
+    margin-left: 5px;
+    margin-right: 5px;
+    text-align: center;
+}
+
+.search-box{
+    margin-top: 20px;
+    flex-grow: 1;
+    min-width: 18rem;
+}
+
+.row-search{
+    border-radius: 10px;
+    background-color: #ededed;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+#input-box{
+    flex: 1;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.img-b{
+    background: transparent;
+    border: none;
+}
+
+.searchimg{
+    width: 27px;
+    height: 27px;
+}
+
+.searchimg:hover{
+    cursor: pointer;
+}
+
+::placeholder{
+    color: #555;
+}
+
+.result-box{
+    margin-top: 20px;
+    border-radius: 10px;
+    border: solid 1px #005BA6;
 }
 
 .footerinfo{
@@ -52,96 +156,4 @@ nav{
 	bottom: 0;
 	width: 100vw;
     height: 60px;
-}
-
-h1 {
-    color: #000000;
-    margin-top: 20px;
-    text-align: center;
-}
-
-.sign-panels {
-    width: 650px;
-    background: #fff;
-    padding: 40px;
-    margin: auto;
-    border-radius: 20px;
-    text-align: center;
-}
-
-.sign-panels input {
-    width: 100%;
-    display: block;
-    margin-bottom: 15px;
-    height: 50px;
-    border-radius: 10px;
-    border: none;
-    background: #ededed;
-    text-align: left;
-    padding: 10px;
-    font-size: 15px;
-    color: #7c7c7c;
-    font-weight: 500;
-}
-
-.sign-panels input:focus {
-    outline:none;
-}
-
-button {
-    background-color: #005BA6;
-    color: white;
-    padding: 10px 20px;
-    margin: 5px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.contactDiv {
-    margin-top: 20px;
-    display: none;
-}
-
-button:hover {
-    background-color: #0a0a0b;
-    color: #fff; 
-}   
-
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-.modal-content {
-    background-color: #fff;
-    margin: 20% auto;
-    padding: 20px;
-    max-width: 300px;
-    text-align: center;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-#confirmDelete,
-#cancelDelete {
-    background-color: #c59513;
-    color: #000;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin: 10px;
-}
-
-#confirmDelete:hover,
-#cancelDelete:hover {
-    background-color: #0a0a0b;
-    color: #fff;
 }
