@@ -6,56 +6,73 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Pacifico&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="/css/landing.css">
-        <script src="landing.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Lato&family=Montserrat&family=Pacifico&family=Roboto:wght@100;300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../css/landing.css">
+        <script type="text/javascript" src="../js/landing.js"></script>
         <title>Contacts</title>
     </head>
     <body>
-        <div class="header">
+        <div class="background">
             <div class="bar">
                 <nav class="navbar navbar-expand-sm fixed-top navbar-dark bg-black">
-                    <a class="navbar-brand" href="/html/index.html">Nautical Nexus</a>
-                    <a class="nav-item" href="/html/aboutus.html">About Us</a>
+                    <a class="navbar-brand" href="../index.html">Nautical Nexus</a>
+                    <a class="nav-item" href="../aboutus.html">About Us</a>
                     <div class="collapse navbar-collapse justify-content-end">
-                        <a href="/html/index.html"><button id="logoutButton" class="btn btn-outline-light">Logout</button></a>
+                        <a href="../index.html"><button id="logoutButton" class="btn btn-outline-light" onclick="doLogout()">Logout</button></a>
                     </div>
                 </nav>
             </div>
-        </div>
 
-        <div id="sub" class="title">
-                <h1>Contacts</h1>
+            <div class="container">
+                <div class="row">
+                     <div id="contactform" class="col-md-4">
+                         <div class="addcontact">
+                            <h3>Add Contact</h3>
+                            <form id="addContactForm">
+                                <div class="inputGroup">
+                                    <label for="firstName">First Name</label>
+                                    <input type="text" id="firstName" name="firstName" required>
+                                </div>
+                                <div class="inputGroup">
+                                    <label for="lastName">Last Name</label>
+                                    <input type="text" id="lastName" name="lastName" required>
+                                </div>
+                                <div class="inputGroup">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                                <div class="inputGroup">
+                                    <label for="phone">Phone</label>
+                                    <input type="tel" id="phone" name="phone" required>
+                                </div>
+                                <div class="form-actions">
+                                    <button class="btn btn-outline-primary" id="addbtn" type="submit">Add Contact</button>
+                                    <button class="btn btn-outline-primary" id="clearbtn" type="button" id="clearFormButton">Clear</button>
+                                </div>
+                            </form>
+                            <p id="addContactMessage"></p>
+                         </div>
+                     </div>
+                     <div class="col-md-8">
+                         <div class="tabledesign">
 
-                <div class="sign-panels">
-                    <form id="addContactForm">
-                        <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
-                        <br>
-                        <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
-                        <br>
-                        <input type="email" id="email" name="email" placeholder="Email Address" required>
-                        <br>
-                        <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
-                        <br>
-                        <button class="addbtn" type="submit">Add Contact</button>
-                        <button class="clearbtn" type="button" id="clearFormButton">Clear</button>
-                    </form>
-    
-                    <p id="addContactMessage"></p>
-                    <button id="toggleContactsButton">Show Contacts</button>
-                    <label for="searchContacts" id="searchLabel" style="display: none;">Search Contacts:</label>
-                    <input type="text" id="searchContacts" name="searchContacts" oninput="searchContacts()" placeholder="Search by name, email, or phone" style="display: none;">     
-                    <div id="contactsList">
-                      
-                    </div>
-                </div>
+                            <div class="search-box">
+                                <div class="row-search">
+                                    <input type="text" id="input-box" placeholder="Search"  name="input-box" autocomplete="off">
+                                    <button id="searchb" class="img-b" onclick="searchContacts()"><img class="searchimg" src="../images/mag.png" alt=""></button>
+                                </div>
 
-            <div id="deleteConfirmationModal" class="modal">
-                <div class="modal-content">
-                    <p>Are you sure you want to delete this contact?</p>
-                    <button id="confirmDelete">Delete</button>
-                    <button id="cancelDelete">Cancel</button>
-                </div>
+                                <!-- table -->
+                                <div class="result-box">
+                                    <div id="contacts-container">
+                                        <p class="blank-message">table placeholder here</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                         </div>
+                     </div>
+                 </div>
             </div>
 
         </div>
@@ -64,4 +81,7 @@
 
     <footer class="footerinfo">
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 </html>
