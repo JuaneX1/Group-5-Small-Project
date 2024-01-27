@@ -16,6 +16,9 @@
 	$password_err = "";
 	$confirm_password_err = "";
 
+	$userID = 0;
+	$err_list = "";
+
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331"); 	
 	if( $conn->connect_error )
 	{
@@ -33,9 +36,13 @@
 		if ( empty($firstName_err) && empty($lastName_err) && empty($username_err) && empty($password_err) && empty($confirm_password_err))
 		{
 			registerUser($conn, $firstName, $lastName, $username, $password);
+			$userID = $conn->insert_id;
 		}
 
-		returnWithRegisterErrors($conn_err, $firstName_err, $lastName_err, $username_err, $password_err, $confirm_password_err);
+		concatErrors($conn_err, $firstName_err, $lastName_err, $username_err, $password_err, $confirm_password_err, $err_list);
+
+		returnWithInfo($userID, $firstName, $lastName, $username, $err_list);
+		// returnWithRegisterErrors($conn_err, $firstName_err, $lastName_err, $username_err, $password_err, $confirm_password_err);
 
 		$conn->close();
 		
@@ -61,7 +68,7 @@
 
         if( $result->num_rows == 1)
         {
-            $username_err = "This username is already taken.";
+            $username_err = "This username is already taken. ";
         }
 
 		$stmt->close();
@@ -73,7 +80,7 @@
 
 		if( empty($password) )
 		{
-			$password_err = "Please enter a password.";
+			$password_err = "Please enter a password. ";
 		}
 		else
 		{
@@ -95,13 +102,13 @@
 		// Validate Confirm Password
 		if (empty($confirm_password))
 		{
-			$confirm_password_err = "Please confirm password.";
+			$confirm_password_err = "Please confirm password. ";
 		}
 		else
 		{
 			if (empty($password_err) && ($password != $confirm_password))
 			{
-				$confirm_password_err = "Passwords do not match.";
+				$confirm_password_err = "Passwords do not match. ";
 			}
 		}
 
@@ -111,12 +118,12 @@
 	{
 		if(!preg_match("/^[a-z ,.'-]+$/i", $firstName))
 		{
-			$firstName_err = "Invalid first name.";
+			$firstName_err = "Invalid first name. ";
 		}
 
 		if(!preg_match("/^[a-z ,.'-]+$/i", $lastName))
 		{
-			$lastName_err = "Invalid last name.";
+			$lastName_err = "Invalid last name. ";
 		}
 	}
 
@@ -131,6 +138,29 @@
 		echo $obj;
 	}
 
+	function returnWithInfo($userID, $firstName, $lastName, $username, $err_list)
+	{
+		if (empty($err_list))
+		{
+			$retValue = '{"id":' . $userID . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","login":"' . $username . '","error":"' . $err_list . '"}';
+		}
+		else
+		{
+			$retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err_list . '"}';
+		}
+		sendResultInfoAsJson($retValue);
+	}
+
+	function concatErrors($conn_err, $firstName_err, $lastName_err, $username_err, $password_err, $confirm_password_err, &$err_list)
+	{
+		$err_list .= $conn_err;
+		$err_list .= $firstName_err;
+		$err_list .= $lastName_err;
+		$err_list .= $username_err;
+		$err_list .= $password_err;
+		$err_list .= $confirm_password_err;
+	}
+
 	function returnWithRegisterErrors($conn_err, $firstName_err, $lastName_err, $username_err, $password_err, $confirm_password_err)
 	{
 		$retValue = '{"connection_error":"' . $conn_err . '",';
@@ -142,5 +172,7 @@
 
 		sendResultInfoAsJson( $retValue );
 	}
+
+
 
 ?>
