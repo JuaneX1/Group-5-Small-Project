@@ -17,16 +17,17 @@
 	$confirm_password_err = "";
 
 	$userID = 0;
+
+	$conn_err = "";
 	$err_list = "";
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331"); 	
 	if( $conn->connect_error )
 	{
-		returnWithError( $conn->connect_error );
+		$conn_err = $conn->connect_error;
 	}
 	else
     {
-		// Check if username is already in the database
 		validateFirstAndLastName($firstName, $lastName, $firstName_err, $lastName_err);
 
 		validateUsername($conn, $username, $username_err);
@@ -42,7 +43,6 @@
 		concatErrors($conn_err, $firstName_err, $lastName_err, $username_err, $password_err, $confirm_password_err, $err_list);
 
 		returnWithInfo($userID, $firstName, $lastName, $username, $err_list);
-		// returnWithRegisterErrors($conn_err, $firstName_err, $lastName_err, $username_err, $password_err, $confirm_password_err);
 
 		$conn->close();
 		
@@ -160,19 +160,5 @@
 		$err_list .= $password_err;
 		$err_list .= $confirm_password_err;
 	}
-
-	function returnWithRegisterErrors($conn_err, $firstName_err, $lastName_err, $username_err, $password_err, $confirm_password_err)
-	{
-		$retValue = '{"connection_error":"' . $conn_err . '",';
-		$retValue .= '"firstName_error":"' . $firstName_err . '",';
-		$retValue .= '"lastName_error":"' . $lastName_err . '",';
-		$retValue .= '"username_error":"' . $username_err . '",';
-		$retValue .= '"password_error":"' . $password_err . '",';
-		$retValue .= '"confirm_password_error":"' . $confirm_password_err . '"}';
-
-		sendResultInfoAsJson( $retValue );
-	}
-
-
 
 ?>
