@@ -143,13 +143,16 @@ function readCookie(){
         }
     }
 
+    let lowerFirst = firstName.toLowerCase();
+    let lowerLast = lastName.toLowerCase();
+
     if(userId < 0){
         window.location.href = "../landing.html";
     }
     else{
         document.getElementById("loggedUser").innerHTML = "Welcome, " + 
-        (firstName.charAt(0).toUpperCase() + firstName.slice(1)) + " " + 
-        (lastName.charAt(0).toUpperCase() + lastName.slice(1)) + "!";
+        (lowerFirst.charAt(0).toUpperCase() + lowerFirst.slice(1)) + " " + 
+        (lowerLast.charAt(0).toUpperCase() + lowerLast.slice(1)) + "!";
     }
 }
 
