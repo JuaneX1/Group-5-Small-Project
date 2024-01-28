@@ -147,7 +147,9 @@ function readCookie(){
         window.location.href = "../landing.html";
     }
     else{
-        document.getElementById("loggedUser").innerHTML = "Welcome, " + firstName + " " + lastName + "!";
+        document.getElementById("loggedUser").innerHTML = "Welcome, " + 
+        (firstName.charAt(0).toUpperCase() + firstName.slice(1)) + " " + 
+        (lastName.charAt(0).toUpperCase() + lastName.slice(1)) + "!";
     }
 }
 
