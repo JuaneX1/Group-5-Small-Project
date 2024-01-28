@@ -8,7 +8,14 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Lato&family=Montserrat&family=Pacifico&family=Roboto:wght@100;300&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="../css/landing.css">
-        <script type="text/javascript" src="../js/landing.js"></script>
+        <script type="text/javascript" src="../js/md5.js"></script>
+        <script type="text/javascript" src="../js/general.js"></script>
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function() {
+                readCookie();
+                loadContacts();
+            }, false);
+        </script>
         <title>Contacts</title>
     </head>
     <body>
@@ -46,7 +53,7 @@
                                     <input type="tel" id="phone" name="phone" required>
                                 </div>
                                 <div class="form-actions">
-                                    <button class="btn btn-outline-primary" id="addbtn" type="submit">Add Contact</button>
+                                    <button class="btn btn-outline-primary" id="addbtn" type="button" onclick="addContact()">Add Contact</button>
                                     <button class="btn btn-outline-primary" id="clearbtn" type="button" id="clearFormButton">Clear</button>
                                 </div>
                             </form>
@@ -54,22 +61,48 @@
                          </div>
                      </div>
                      <div class="col-md-8">
+
+                        <div class="loggedInDiv">
+                            <span id="loggedUser"></span>
+                        </div>
+
                          <div class="tabledesign">
 
-                            <div class="search-box">
-                                <div class="row-search">
-                                    <input type="text" id="input-box" placeholder="Search"  name="input-box" autocomplete="off">
-                                    <button id="searchb" class="img-b" onclick="searchContacts()"><img class="searchimg" src="../images/mag.png" alt=""></button>
+                            <div class="row">
+                                <div id="searchDiv" class="col-sm-9">
+                                    <div class="search-box">
+                                        <div class="row-search">
+                                            <input onkeyup="searchContacts()" type="text" id="input-box" placeholder="Search"  name="input-box" autocomplete="off">
+                                            <button type="button" id="searchb" class="img-b" onclick="searchContacts()"><img class="searchimg" src="../images/mag.png" alt=""></button>
+                                        </div>
+                                    </div>
                                 </div>
-
-                                <!-- table -->
-                                <div class="result-box">
-                                    <div id="contacts-container">
-                                        <p class="blank-message">table placeholder here</p>
+                                <div class="col-sm-3" id="refDiv">
+                                    <div class="ref">
+                                        <div class="refclass">
+                                            <button type="button" id="refreshic" class="img-r" onclick=loadContacts()"><img class="refreshimg" src="../images/refresh.png" alt=""></button>
+                                            Refresh
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
+                            <div class="tableDiv">
+                                <div class="tbl-content" id="contactsTable">
+                                    <table id="contacts" cellpadding="0" cellspacing="0" border="0">
+                                        <thread>
+                                            <tr>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>Email</th>
+                                                <th>Phone</th>
+                                                <th>Edit/Delete</th>
+                                            </tr>
+                                        </thread>
+                                        <tbody id="tb"></tbody>
+                                    </table>
+                                </div>
+                            </div>
                          </div>
                      </div>
                  </div>
