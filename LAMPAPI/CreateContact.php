@@ -2,6 +2,8 @@
 
     $inData = getRequestInfo();
 
+    $contactID = 0;
+
     $firstName = $inData["firstName"];
     $lastName = $inData["lastName"];
 
@@ -17,12 +19,14 @@
     $userID_err = "";
 
     $duplicate_err = "";
+
+    $conn_err = "";
     $err_list = "";
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 	if( $conn->connect_error )
 	{
-		returnWithError( $conn->connect_error );
+		$conn_err = $conn->connect_error;
 	}
 	else
     {
@@ -38,11 +42,11 @@
 
         if (empty($firstName_err) && empty($lastName_err) && empty($phone_err) && empty($email_err) && empty($userID_err) && empty($duplicate_err))
         {
-            createContact($conn, $firstName, $lastName, $phone, $email, $userID);
+            createContact($conn, $firstName, $lastName, $phone, $email, $userID, $contactID);
         }
         concatErrors($conn_err, $firstName_err, $lastName_err, $phone_err, $email_err, $userID_err, $duplicate_err, $err_list);
 
-        returnWithInfo($userID, $firstName, $lastName, $phone, $email, $err_list);
+        returnWithInfo($contactID, $firstName, $lastName, $phone, $email, $userID, $err_list);
 
         $conn->close();
     }
@@ -94,11 +98,13 @@
 
     }
 
-    function createContact(&$conn, $firstName, $lastName, $phone, $email, $userID)
+    function createContact(&$conn, $firstName, $lastName, $phone, $email, $userID, &$contactID)
     {
         $stmt = $conn->prepare("INSERT INTO Contacts (FirstName, LastName, Phone, Email, UserID) VALUES (?, ?, ?, ?, ?)");
         $stmt->bind_param("ssssi", $firstName, $lastName, $phone, $email, $userID);
         $stmt->execute();
+
+        $contactID = $conn->insert_id;
 
         $stmt->close();
     }
@@ -130,15 +136,15 @@
 		echo $obj;
 	}
 
-    function returnWithInfo($userID, $firstName, $lastName, $phone, $email, $err_list)
+    function returnWithInfo($contactID, $firstName, $lastName, $phone, $email, $userID, $err_list)
     {
         if (empty($err_list))
         {
-			$retValue = '{"id":' . $userID . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","phone":"' . $phone . '","email":"' . $email . '","error":""}';
+			$retValue = '{"contactID":' . $contactID . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","phone":"' . $phone . '","email":"' . $email . '","userID":' . $userID . ',"error":""}';
         }
         else
         {
-			$retValue = '{"id":0,"firstName":"","lastName":"","phone":"","email":"","error":"' . $err_list . '"}';
+			$retValue = '{"contactID":0,"firstName":"","lastName":"","phone":"","email":"","userID":0,"error":"' . $err_list . '"}';
         }
         sendResultInfoAsJson($retValue);
     }
