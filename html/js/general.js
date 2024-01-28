@@ -54,7 +54,7 @@ function doLogin(){
 	}
 }
 
-// ????
+// fine
 function doRegister(){  
 
     firstName = document.getElementById("firstName").value;
@@ -73,7 +73,7 @@ function doRegister(){
         return;
 	}
 
-    let tmp = {firstName, lastName, login:login, password:password};
+    let tmp = {firstName, lastName, login:login, password:password, confirm_password:passwordCheck};
 	//var tmp = {login:login,password:hash};
     let jsonPayload = JSON.stringify(tmp);
     
@@ -120,37 +120,36 @@ function saveCookie(){
 	document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
 }
 
-// should be fine
+// fine
 function readCookie(){
 
     userId = -1;
+    let data = document.cookie;
+    let splits = data.split(",");
 
-    let firstNameCookie = getCookie("firstName");
-    let lastNameCookie = getCookie("lastName");
-    let userIdCookie = getCookie("userId");
+    for(var i = 0; i < splits.length; i++){
 
-    if (firstNameCookie !== ""){
-        firstName = firstNameCookie;
+        let thisOne = splits[i].trim();
+        let tokens = thisOne.split("=");
+
+        if (tokens[0] == "firstName"){
+            firstName = tokens[1];
+        }
+        else if (tokens[0] == "lastName"){
+            lastName = tokens[1];
+        }
+        else if (tokens[0] == "userId"){
+            userId = parseInt(tokens[1].trim());
+        }
     }
 
-	if (lastNameCookie !== ""){
-        lastName = lastNameCookie;
+    if(userId < 0){
+        window.location.href = "../landing.html";
     }
-
-    if (userIdCookie !== ""){
-        userId = parseInt(userIdCookie);
+    else{
+        document.getElementById("loggedUser").innerHTML = "Welcome, " + firstName + " " + lastName + "!";
     }
-	
-	if(userId < 0){
-		window.location.href = "../index.html";
-	}
-
-	else{
-		document.getElementById("loggedUser").innerHTML = "Welcome, " + firstName + " " + lastName + "!";
-	}
 }
-
-
 
 // fine
 function doLogout(){
