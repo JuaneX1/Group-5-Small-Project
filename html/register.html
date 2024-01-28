@@ -7,6 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato&family=Montserrat&family=Pacifico&family=Roboto:wght@100;300&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="../js/md5.js"></script>
+	<script type="text/javascript" src="../js/general.js"></script>
     <link rel="stylesheet" href="../css/register.css">
     <title>Register</title>
 </head>
@@ -32,22 +34,22 @@
                 <input type="text" id="lastName" name="lastName" required>
             </div>
             <div class="inputGroup">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" required>
+                <label for="login">Username</label>
+                <input type="text" id="login" name="login" required>
             </div>
             <div class="inputGroup">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required>
             </div>
             <div class="inputGroup">
-                <label for="password">Confirm Password</label>
+                <label for="confirm_password">Confirm Password</label>
                 <input type="password" id="confirm_password" name="confirm_password" required>
             </div>
             <div class="form-actions">
-                <button type="submit" id="submitbtn" class="btn btn-primary">Register</button>
+                <button type="button" id="submitbtn" class="btn btn-primary" onclick="doRegister()">Register</button>
             </div>
         </form>
-        <p id="loginMessage"></p>
+        <p id="signupMessage"></p>
         <p>Have an account? <a href="../login.html">Log in</a></p>
     </div>
 
@@ -55,6 +57,6 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script><script src="../js/register.css"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 </body>
 </html>

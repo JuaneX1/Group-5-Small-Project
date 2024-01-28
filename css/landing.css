@@ -97,14 +97,25 @@ h3{
     text-align: center;
 }
 
+.loggedInDiv{
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    font-size: 24px;
+}
+
 .tabledesign{
     margin-left: 5px;
     margin-right: 5px;
     text-align: center;
 }
 
+#searchDiv, #refDiv{
+    margin-top: 10px;
+}
+
 .search-box{
-    margin-top: 20px;
     flex-grow: 1;
     min-width: 18rem;
 }
@@ -118,6 +129,7 @@ h3{
 }
 
 #input-box{
+    font-family: 'Roboto', serif;
     flex: 1;
     background: transparent;
     border: 0;
@@ -126,28 +138,81 @@ h3{
     color: #333;
 }
 
-.img-b{
+.img-b, .img-r{
     background: transparent;
     border: none;
 }
 
-.searchimg{
+.searchimg, .refreshimg{
     width: 27px;
     height: 27px;
 }
 
-.searchimg:hover{
-    cursor: pointer;
+.refclass{
+    font-family: 'Roboto', serif;
+    border-radius: 10px;
+    background-color: #ededed;
+    padding: 10px 20px;
+}
+
+.refclass:hover{
+    background-color: #A4A4A4;
+    transition: 0.3s;
 }
 
 ::placeholder{
     color: #555;
 }
 
-.result-box{
+.tableDiv{
     margin-top: 20px;
+}
+
+.tbl-content{
+    height: 350px;
+    overflow-x: auto;
+    margin-top: 0px;
+    border: 1px solid #005BA6;
     border-radius: 10px;
-    border: solid 1px #005BA6;
+    display: block;
+}
+
+table{
+    width: 100%;
+    table-layout: fixed;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#contacts td,
+#contacts th{
+    border: 1px solid #005BA6;
+}
+
+#contacts th{
+    padding: 5px 10px;
+    font-weight: bold;
+    color: white;
+    background-color: #005BA6;
+    text-transform: uppercase;
+}
+
+#contacts td {
+    padding: 15px;
+    text-align: left;
+    font-family: 'Roboto', serif;
+    vertical-align: middle;
+    font-size: 14px;
+}
+
+#contacts td span {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 100%;
+    color: #000000;
 }
 
 .footerinfo{
