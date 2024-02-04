@@ -164,3 +164,45 @@ function doLogout(){
 	document.cookie = "firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
 	window.location.href = "../index.html";
 }   
+
+
+function addContact() {
+    let firstname = document.getElementById("firstName").value;
+    let lastname = document.getElementById("lastName").value;
+    let phonenumber = document.getElementById("phone").value;
+    let emailaddress = document.getElementById("email").value;
+
+    if (firstname == "" || lastname == "" || emailaddress == "" || phonenumber == "") {
+        document.getElementById("addContactMessage").innerHTML = "missing fields.";
+        return;
+    }
+
+    let tmp = {
+        firstName: firstname,
+        lastName: lastname,
+        phoneNumber: phonenumber,
+        emailAddress: emailaddress,
+        userId: userId 
+    };
+
+    let jsonPayload = JSON.stringify(tmp);
+
+    let url = urlBase + '/CreateContact.' + extension;
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    try {
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("addContactMessage").innerHTML = "Successfully added contact.";
+                document.getElementById("addContactForm").reset();
+                //loadContacts();
+                //showTable();
+            }
+        };
+        xhr.send(jsonPayload);
+    } catch (err) {
+        console.log(err.message);
+    }
+}
