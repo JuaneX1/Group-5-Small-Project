@@ -165,6 +165,20 @@ function doLogout(){
 	window.location.href = "../index.html";
 }   
 
+function showTable() {
+    var addContactForm = document.getElementById("addContactForm");
+    var contactsTable = document.getElementById("contactsTable");
+
+    if (addContactForm.style.display !== "none") {
+        addContactForm.style.display = "none";
+        contactsTable.style.display = "block";
+        loadContacts(); 
+
+    } else {
+        addContactForm.style.display = "block";
+        contactsTable.style.display = "none";
+    }
+}
 
 function addContact() {
     let firstname = document.getElementById("firstName").value;
@@ -197,8 +211,52 @@ function addContact() {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById("addContactMessage").innerHTML = "Successfully added contact.";
                 document.getElementById("addContactForm").reset();
-                //loadContacts();
-                //showTable();
+                loadContacts();
+            }
+        };
+        xhr.send(jsonPayload);
+    } catch (err) {
+        console.log(err.message);
+    }
+}
+
+function loadContacts() {
+    let tmp = {
+        search: "",
+        userId: userId
+    };
+
+    let jsonPayload = JSON.stringify(tmp);
+
+    let url = urlBase + '/SearchContact.' + extension;
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+    try {
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                let jsonObject = JSON.parse(xhr.responseText);
+                if (jsonObject.error) {
+                    console.log(jsonObject.error);
+                    return;
+                }
+                let text = "<table border='1'>"
+                for (let i = 0; i < jsonObject.results.length; i++) {
+                    ids[i] = jsonObject.results[i].ID
+                    text += "<tr id='row" + i + "'>"
+                    text += "<td id='first_Name" + i + "'><span>" + jsonObject.results[i].firstName + "</span></td>";
+                    text += "<td id='last_Name" + i + "'><span>" + jsonObject.results[i].lastName + "</span></td>";
+                    text += "<td id='email" + i + "'><span>" + jsonObject.results[i].emailAddress + "</span></td>";
+                    text += "<td id='phone" + i + "'><span>" + jsonObject.results[i].phoneNumber + "</span></td>";
+                    text += "<td>" +
+                        "<button type='button' id='edit_button" + i + "' class='w3-button w3-circle w3-lime' onclick='edit_row(" + i + ")'>" + "<span class='glyphicon glyphicon-edit'></span>" + "</button>" +
+                        "<button type='button' id='save_button" + i + "' value='Save' class='w3-button w3-circle w3-lime' onclick='save_row(" + i + ")' style='display: none'>" + "<span class='glyphicon glyphicon-saved'></span>" + "</button>" +
+                        "<button type='button' onclick='delete_row(" + i + ")' class='w3-button w3-circle w3-amber'>" + "<span class='glyphicon glyphicon-trash'></span> " + "</button>" + "</td>";
+                    text += "<tr/>"
+                }
+                text += "</table>"
+                document.getElementById("tbody").innerHTML = text;
             }
         };
         xhr.send(jsonPayload);
