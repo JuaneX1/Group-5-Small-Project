@@ -27,17 +27,34 @@
 
     function searchContacts(&$conn, $userSearch, $userID, &$searchResults, &$searchCount, &$search_err)
     {
-        $stmt = $conn->prepare("SELECT * FROM Contacts WHERE 
-        (FirstName LIKE ? OR 
-        LastName LIKE ? OR 
-        Phone LIKE ? OR 
-        Email LIKE ?) AND UserID=?");
 
-        $userSearchParam = "%" . $userSearch . "%";
-        $stmt->bind_param("ssssi", $userSearchParam, $userSearchParam, $userSearchParam, $userSearchParam, $userID);
-        $stmt->execute();
+        $stmt = null;
+        $result = null;
+        if (empty($userSearch))
+        {
+            $stmt = $conn->prepare("SELECT * FROM Contacts WHERE UserID=?");
+            $stmt->bind_param("i", $userID);
+            $stmt->execute();
+            
+            $result = $stmt->get_result();
 
-        $result = $stmt->get_result();
+        }
+        else
+        {
+            $stmt = $conn->prepare("SELECT * FROM Contacts WHERE 
+            (FirstName LIKE ? OR 
+            LastName LIKE ? OR 
+            Phone LIKE ? OR 
+            Email LIKE ?) AND UserID=?");
+
+            $userSearchParam = "%" . $userSearch . "%";
+            $stmt->bind_param("ssssi", $userSearchParam, $userSearchParam, $userSearchParam, $userSearchParam, $userID);
+            $stmt->execute();
+
+            $result = $stmt->get_result();
+
+        }
+
 
         while($row = $result->fetch_assoc())
         {
