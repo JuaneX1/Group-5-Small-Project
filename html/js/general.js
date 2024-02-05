@@ -165,44 +165,31 @@ function doLogout(){
 	window.location.href = "../index.html";
 }   
 
-function showTable() {
-    var addContactForm = document.getElementById("addContactForm");
-    var contactsTable = document.getElementById("contactsTable");
-
-    if (addContactForm.style.display !== "none") {
-        addContactForm.style.display = "none";
-        contactsTable.style.display = "block";
-        loadContacts(); 
-
-    } else {
-        addContactForm.style.display = "block";
-        contactsTable.style.display = "none";
-    }
-}
 
 function addContact() {
-    let firstname = document.getElementById("firstName").value;
-    let lastname = document.getElementById("lastName").value;
-    let phonenumber = document.getElementById("phone").value;
-    let emailaddress = document.getElementById("email").value;
+    let firstName = document.getElementById("firstName").value;
+    let lastName = document.getElementById("lastName").value;
+    let phone = document.getElementById("phone").value;
+    let email = document.getElementById("email").value;
 
-    if (firstname == "" || lastname == "" || emailaddress == "" || phonenumber == "") {
+    if (firstName == "" || lastName == "" || email == "" || phone == "") {
         document.getElementById("addContactMessage").innerHTML = "missing fields.";
         return;
     }
 
     let tmp = {
-        firstName: firstname,
-        lastName: lastname,
-        phoneNumber: phonenumber,
-        emailAddress: emailaddress,
-        userId: userId 
+        firstName: firstName,
+        lastName: lastName,
+        phone: phone,
+        email: email,
+        userID: userId
     };
 
+    // Print the contact information to the console
+    console.log("Adding contact:", tmp);
+
     let jsonPayload = JSON.stringify(tmp);
-
     let url = urlBase + '/CreateContact.' + extension;
-
     let xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
@@ -220,11 +207,14 @@ function addContact() {
     }
 }
 
+
 function loadContacts(){
     let tmp = {
         search: "",
         userID: userId
     };
+
+    console.log("loadcontact:", tmp);
 
     let jsonPayload = JSON.stringify(tmp);
 
