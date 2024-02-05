@@ -40,6 +40,17 @@ button{
     margin-bottom: 20px;
 }
 
+.gitLink{
+    transition: 0.5s;
+    text-decoration: none;
+    color: white;
+}
+
+.gitLink:hover{
+    color: black;
+    transition: 0.5s;
+}
+
 .footerinfo{
 	background-color: #ab946b;
 	position: fixed;
