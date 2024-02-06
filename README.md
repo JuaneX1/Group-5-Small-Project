@@ -3,12 +3,12 @@
 ### Spring 2024
 
 ### Credits To:
-##### Mahdy Ferhat: Back End (Database)
+##### - Mahdy Ferhat: Back End (Database)
 
-##### Cristian Suares-Lorez: Back End (API's)
+##### - Cristian Suares-Lorez: Back End (API's)
 
-##### Yasminie Sahadeo: Front End (UI Design)
+##### - Yasminie Sahadeo: Front End (UI Design)
 
-##### Yahya Alrahmani: Front End (JavaScript)
+##### - Yahya Alrahmani: Front End (JavaScript)
 
-##### Juan Peñuela: Project Manager
+##### - Juan Peñuela: Project Manager
