@@ -242,9 +242,33 @@ function loadContacts(){
                     text += "<td id='email" + i + "'><span>" + jsonObject.results[i].email + "</span></td>";
                     text += "<td id='phone" + i + "'><span>" + jsonObject.results[i].phone + "</span></td>";
                     text += "<td>" +
-                        "<button type='button' id='edit_button" + i + "' class='w3-button w3-sand' onclick='edit_row(" + i + ")'>" + "<span class='glyphicon glyphicon-edit'></span>" + "</button>" +
-                        "<button type='button' id='save_button" + i + "' value='Save' class='w3-button w3-light-blue' onclick='save_row(" + i + ")' style='display: none'>" + "<span class='glyphicon glyphicon-saved'></span>" + "</button>" +
-                        "<button type='button' onclick='delete_row(" + i + ")' class='w3-button w3-circle w3-light-grey'>" + "<span class='glyphicon glyphicon-trash'></span> " + "</button>" + "</td>";
+                        "<button type='button' id='edit_button" + i + "' class='btn btn-dark' onclick='edit_row(" + i + ")' style='margin-right: 5px'>" + 
+                            "<span>" + 
+                                "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' color='white' class='bi bi-pencil-square' viewBox='0 0 16 16'>" +
+                                    "<path d='M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z'/>" +
+                                    "<path fill-rule='evenodd' d='M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z'/>" +
+                                "</svg>" +
+                            "</span>" + 
+                        "</button>" +
+
+                        "<button type='button' id='save_button" + i + "' value='Save' class='btn btn-success' onclick='save_row(" + i + ")' style='display: none; margin-right: 5px'>" +
+                            "<span>" + 
+                                "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' color='white' class='bi bi-floppy' viewBox='0 0 16 16'>" +
+                                    "<path d='M11 2H9v3h2z'/>" +
+                                    "<path d='M1.5 0h11.586a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 14.5v-13A1.5 1.5 0 0 1 1.5 0M1 1.5v13a.5.5 0 0 0 .5.5H2v-4.5A1.5 1.5 0 0 1 3.5 9h9a1.5 1.5 0 0 1 1.5 1.5V15h.5a.5.5 0 0 0 .5-.5V2.914a.5.5 0 0 0-.146-.353l-1.415-1.415A.5.5 0 0 0 13.086 1H13v4.5A1.5 1.5 0 0 1 11.5 7h-7A1.5 1.5 0 0 1 3 5.5V1H1.5a.5.5 0 0 0-.5.5m3 4a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5V1H4zM3 15h10v-4.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5z'/>" +
+                                "</svg>" +
+                            "</span>" + 
+                        "</button>" +
+
+                        "<button type='button' onclick='delete_row(" + i + ")' class='btn btn-danger'>" + 
+                            "<span>" + 
+                                "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' color='white' class='bi bi-trash' viewBox='0 0 16 16'>" +
+                                    "<path d='M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z'/>" +
+                                    "<path d='M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z'/>" +
+                                "</svg>" +   
+                            "</span>" + 
+                        "</button>" + 
+                        "</td>";
                     text += "</tr>"
                 }
                 text += "</table>"
