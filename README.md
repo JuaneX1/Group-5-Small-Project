@@ -1,6 +1,5 @@
 # Nautical Nexus
-### Small Project Group 5
-### Spring 2024
+### Small Project Group 5 - Spring 2024
 
 ### Credits To:
 ##### - Mahdy Ferhat: Back End (Database)
