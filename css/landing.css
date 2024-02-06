@@ -199,12 +199,23 @@ table{
     text-transform: uppercase;
 }
 
+
 #contacts td {
-    padding: 15px;
     text-align: left;
+    padding: 5px 10px 5px 10px;
     font-family: 'Roboto', serif;
     vertical-align: middle;
     font-size: 14px;
+}
+
+#contacts td:last-child{
+    text-align: center !important;
+}
+
+#contacts input{
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 #contacts td span {
