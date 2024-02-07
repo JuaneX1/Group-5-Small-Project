@@ -74,6 +74,15 @@ nav{
 #submitbtn{
     margin-top: 10px;
     background-color: #005BA6;
+    transition: 0.1s;
+}
+
+#submitbtn:hover{
+    margin-top: 10px;
+    border: 1px solid #005BA6;
+    background-color: white;
+    color: #005BA6;
+    transition: 0.1s;
 }
 
 p{
