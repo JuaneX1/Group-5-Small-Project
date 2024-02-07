@@ -17,6 +17,12 @@ function doLogin(){
 	
 	document.getElementById("loginResult").innerHTML = "";
 
+	if(login == "" || password == ""){
+        	document.getElementById("loginResult").style = "color: red; margin-top: 5px;";
+		document.getElementById("loginResult").innerHTML = "Field(s) are blank.";
+        	return;
+	}
+
 	let tmp = {login:login,password:password};
 	let jsonPayload = JSON.stringify(tmp);
 	
@@ -32,7 +38,8 @@ function doLogin(){
 				userId = jsonObject.id;
 		
 				if(userId < 1){		
-					document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
+                    			document.getElementById("loginResult").style = "color: red; margin-top: 5px;";
+					document.getElementById("loginResult").innerHTML = "Username or password is incorrect.";
 					return;
 				}
 		
