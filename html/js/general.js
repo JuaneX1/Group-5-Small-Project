@@ -131,16 +131,6 @@ function doRegister(){
     }
 }
 
-function validateName(name){
-    const regex = /^[a-zA-Z]{1,20}$/;
-    return regex.test(name);
-}
-
-function validatePassword(password){
-    const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
-    return regex.test(password);
-}
-
 function saveCookie(){
 	let minutes = 20;
 	let date = new Date();
@@ -198,8 +188,27 @@ function addContact() {
     let phone = document.getElementById("phone").value;
     let email = document.getElementById("email").value;
 
-    if (firstName == "" || lastName == "" || email == "" || phone == "") {
-        document.getElementById("addContactMessage").innerHTML = "missing fields.";
+    if(firstName == "" || lastName == "" || email == "" || phone == "") {
+        document.getElementById("addContactMessage").style = "color: red; margin-top: 5px;";
+        document.getElementById("addContactMessage").innerHTML = "Field(s) are blank.";
+        return;
+    }
+
+    if(!(validateName(firstName)) || !(validateName(lastName))){
+        document.getElementById("addContactMessage").style = "color: red; margin-top: 5px;";
+	document.getElementById("addContactMessage").innerHTML = "Name should only contain letters.";
+        return;
+    }
+
+    if(!(validateEmail(email))){
+        document.getElementById("addContactMessage").style = "color: red; margin-top: 5px;";
+	document.getElementById("addContactMessage").innerHTML = "Email format invalid.";
+        return;
+    }
+
+    if(!(validatePhone(phone))){
+        document.getElementById("addContactMessage").style = "color: red; margin-top: 5px;";
+	document.getElementById("addContactMessage").innerHTML = "Phone format invalid.";
         return;
     }
 
@@ -232,7 +241,6 @@ function addContact() {
         console.log(err.message);
     }
 }
-
 
 function loadContacts(){
     let tmp = {
@@ -368,4 +376,24 @@ function save_row(no) {
     } catch (err) {
         console.log(err.message);
     }
+}
+
+function validateName(name){
+    const regex = /^[a-zA-Z]{1,20}$/;
+    return regex.test(name);
+}
+
+function validatePassword(password){
+    const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+    return regex.test(password);
+}
+
+function validateEmail(email){
+    const regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    return regex.test(email);
+}
+
+function validatePhone(phone){
+    const regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+    return regex.test(phone);
 }
