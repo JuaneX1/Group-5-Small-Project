@@ -6,7 +6,6 @@ let firstName = "";
 let lastName = "";
 const ids = [];
 
-// fine
 function doLogin(){
 
 	userId = 0;
@@ -15,12 +14,10 @@ function doLogin(){
 	
 	let login = document.getElementById("loginName").value;
 	let password = document.getElementById("loginPassword").value;
-	//var hash = md5(password);
 	
 	document.getElementById("loginResult").innerHTML = "";
 
 	let tmp = {login:login,password:password};
-	//var tmp = {login:login,password:hash};
 	let jsonPayload = JSON.stringify(tmp);
 	
 	let url = urlBase + '/Login.' + extension;
@@ -54,7 +51,6 @@ function doLogin(){
 	}
 }
 
-// fine
 function doRegister(){  
 
     firstName = document.getElementById("firstName").value;
@@ -63,18 +59,31 @@ function doRegister(){
     let password = document.getElementById("password").value;
     let passwordCheck = document.getElementById("confirm_password").value;
 
-    if(password != passwordCheck){
-        document.getElementById("signupMessage").innerHTML = "Passwords do not match";
+    if(firstName == "" || lastName == "" || login == "" || password == "" || passwordCheck == ""){
+        document.getElementById("signupMessage").style = "color: red; margin-top: 5px;";
+	document.getElementById("signupMessage").innerHTML = "Field(s) are blank.";
         return;
     }
 
-	if(firstName == "" || lastName == "" || login == "" || password == "" || passwordCheck == ""){
-		document.getElementById("signupMessage").innerHTML = "Field(s) are blank";
+    if(!(validateName(firstName)) || !(validateName(lastName))){
+        document.getElementById("signupMessage").style = "color: red; margin-top: 5px;";
+	document.getElementById("signupMessage").innerHTML = "Name should only contain letters.";
         return;
-	}
+    }
+
+    if(!(validatePassword(password))){
+        document.getElementById("signupMessage").style = "color: red; margin-top: 5px;";
+	document.getElementById("signupMessage").innerHTML = "Password requires at least six characters, one capital letter, and one number.";
+        return;
+    }
+
+    if(password != passwordCheck){
+        document.getElementById("signupMessage").style = "color: red; margin-top: 5px;";
+        document.getElementById("signupMessage").innerHTML = "Passwords do not match.";
+        return;
+    }
 
     let tmp = {firstName, lastName, login:login, password:password, confirm_password:passwordCheck};
-	//var tmp = {login:login,password:hash};
     let jsonPayload = JSON.stringify(tmp);
     
     let url = urlBase + '/Register.' + extension;
@@ -88,7 +97,8 @@ function doRegister(){
                 let jsonObject = JSON.parse(xhr.responseText);
                 userId = jsonObject.id;
         
-                if(userId < 1){       
+                if(userId < 1){
+		    document.getElementById("signupMessage").style = "color: red; margin-top: 5px;";
                     document.getElementById("signupMessage").innerHTML = "Registration failed";
                     return;
                 }
@@ -98,9 +108,11 @@ function doRegister(){
 
                 saveCookie();
 
+		document.getElementById("signupMessage").style = "color: green; margin-top: 5px;";    
                 document.getElementById("signupMessage").innerHTML = "Successfully added user!";
             }
-			else if(this.status == 409) {
+	    else if(this.status == 409) {
+		document.getElementById("signupMessage").style = "color: red; margin-top: 5px;";    
                 document.getElementById("signupMessage").innerHTML = "User already exists";
                 return;
             }
@@ -112,7 +124,16 @@ function doRegister(){
     }
 }
 
-// fine
+function validateName(name){
+    const regex = /^[a-zA-Z]{1,20}$/;
+    return regex.test(name);
+}
+
+function validatePassword(password){
+    const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+    return regex.test(password);
+}
+
 function saveCookie(){
 	let minutes = 20;
 	let date = new Date();
@@ -120,7 +141,6 @@ function saveCookie(){
 	document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
 }
 
-// fine
 function readCookie(){
 
     userId = -1;
@@ -156,7 +176,6 @@ function readCookie(){
     }
 }
 
-// fine
 function doLogout(){
 	userId = 0;
 	firstName = "";
