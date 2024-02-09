@@ -231,7 +231,6 @@ function addContact() {
     try {
         xhr.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-		document.getElementById("addContactMessage").style = "color: green; margin-top: 5px;";
                 document.getElementById("addContactMessage").innerHTML = "Successfully added contact.";
                 document.getElementById("addContactForm").reset();
                 loadContacts();
@@ -341,7 +340,8 @@ function save_row(no) {
     var namel_val = document.getElementById("namel_text" + no).value;
     var email_val = document.getElementById("email_text" + no).value;
     var phone_val = document.getElementById("phone_text" + no).value;
-    var id_val = ids[no]
+    
+    var contactID = ids[no]; 
 
     document.getElementById("first_Name" + no).innerHTML = namef_val;
     document.getElementById("last_Name" + no).innerHTML = namel_val;
@@ -352,11 +352,12 @@ function save_row(no) {
     document.getElementById("save_button" + no).style.display = "none";
 
     let tmp = {
-        phoneNumber: phone_val,
-        emailAddress: email_val,
-        newFirstName: namef_val,
-        newLastName: namel_val,
-        id: id_val
+        contactID: contactID, 
+        userID: userId, 
+        firstName: namef_val,
+        lastName: namel_val,
+        email: email_val,
+        phone: phone_val
     };
 
     let jsonPayload = JSON.stringify(tmp);
@@ -370,7 +371,7 @@ function save_row(no) {
         xhr.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 console.log("Contact has been updated");
-                loadContacts();
+                loadContacts(); 
             }
         };
         xhr.send(jsonPayload);
@@ -378,6 +379,71 @@ function save_row(no) {
         console.log(err.message);
     }
 }
+
+
+
+function delete_row(no) {
+    var contactID = ids[no]; 
+
+    let check = confirm('Confirm Delete?');
+    if (check === true) {
+        document.getElementById("row" + no).outerHTML = "";
+        let tmp = {
+            contactID: contactID, // Send contactID
+            userID: userId 
+        };
+
+        let jsonPayload = JSON.stringify(tmp);
+
+        let url = urlBase + '/DeleteContact.' + extension;
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+        try {
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log("Contact has been deleted");
+                    loadContacts(); // Refresh the contact list
+                }
+            };
+            xhr.send(jsonPayload);
+        } catch (err) {
+            console.log(err.message);
+        }
+    }
+}
+
+    
+
+function searchContacts() {
+    const content = document.getElementById("input-box");
+    const selections = content.value.toUpperCase().split(' ');
+    const table = document.getElementById("contacts");
+    const tr = table.getElementsByTagName("tr");// Table Row
+
+    for (let i = 0; i < tr.length; i++) {
+        const td_fn = tr[i].getElementsByTagName("td")[0];// Table Data: First Name
+        const td_ln = tr[i].getElementsByTagName("td")[1];// Table Data: Last Name
+
+        if (td_fn && td_ln) {
+            const txtValue_fn = td_fn.textContent || td_fn.innerText;
+            const txtValue_ln = td_ln.textContent || td_ln.innerText;
+            tr[i].style.display = "none";
+
+            for (selection of selections) {
+                if (txtValue_fn.toUpperCase().indexOf(selection) > -1) {
+                    tr[i].style.display = "";
+                }
+                if (txtValue_ln.toUpperCase().indexOf(selection) > -1) {
+                    tr[i].style.display = "";
+                }
+            }
+        }
+    }
+}
+
+
 
 function validateName(name){
     const regex = /^[a-zA-Z]{1,20}$/;
@@ -405,3 +471,4 @@ function clearFields(){
     document.getElementById("email").value = "";
     document.getElementById("phone").value = "";
 }
+
