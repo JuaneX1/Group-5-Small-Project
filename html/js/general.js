@@ -231,6 +231,7 @@ function addContact() {
     try {
         xhr.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
+		document.getElementById("signupMessage").style = "color: green; margin-top: 5px;";
                 document.getElementById("addContactMessage").innerHTML = "Successfully added contact.";
                 document.getElementById("addContactForm").reset();
                 loadContacts();
@@ -380,8 +381,6 @@ function save_row(no) {
     }
 }
 
-
-
 function delete_row(no) {
     var contactID = ids[no]; 
 
@@ -414,8 +413,6 @@ function delete_row(no) {
     }
 }
 
-    
-
 function searchContacts() {
     const content = document.getElementById("input-box");
     const selections = content.value.toUpperCase().split(' ');
@@ -443,8 +440,6 @@ function searchContacts() {
     }
 }
 
-
-
 function validateName(name){
     const regex = /^[a-zA-Z]{1,20}$/;
     return regex.test(name);
@@ -471,4 +466,3 @@ function clearFields(){
     document.getElementById("email").value = "";
     document.getElementById("phone").value = "";
 }
-
