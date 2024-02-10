@@ -231,7 +231,7 @@ function addContact() {
     try {
         xhr.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-		document.getElementById("signupMessage").style = "color: green; margin-top: 5px;";
+		document.getElementById("addContactMessage").style = "color: green; margin-top: 5px;";
                 document.getElementById("addContactMessage").innerHTML = "Successfully added contact.";
                 document.getElementById("addContactForm").reset();
                 loadContacts();
